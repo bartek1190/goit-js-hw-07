@@ -4,7 +4,7 @@ import { galleryItems } from "./gallery-items.js";
 console.log(galleryItems);
 
 const galleryList = document.querySelector(".gallery");
-
+// tworzenie i renderowanie galleri
 galleryItems.forEach((item) => {
   const galleryItem = document.createElement("li");
   galleryItem.classList.add("gallery__item");
@@ -19,9 +19,6 @@ galleryItems.forEach((item) => {
   galleryLink.appendChild(galleryImage);
   galleryItem.appendChild(galleryLink);
   galleryList.appendChild(galleryItem);
-  console.log(galleryList);
-  console.log(galleryItem);
-  console.log(galleryLink);
 });
 galleryList.addEventListener("click", selectImage);
 function selectImage(event) {
@@ -34,4 +31,11 @@ function selectImage(event) {
     <img src="${event.target.dataset.source}" alt="${event.target.alt}" />
 `);
   instance.show();
+  document.addEventListener("keydown", escape);
+  function escape(e) {
+    if (e.code === "Escape") {
+      instance.close();
+      document.removeEventListener("keydown", escape);
+    }
+  }
 }
